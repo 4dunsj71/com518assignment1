@@ -18,10 +18,11 @@ function goto(lat,lon){
 };
 
 function pin(){
-    let lat =  document.getElementById("0").getElementById("lat0");
-    let lon =  document.getElementById("0").getElementById("lon0");
-    console.log(lat,lon);
+    let lat =  document.getElementById("lat0").getvalue;
+    let lon =  document.getElementById("lon0").getvalue;
+    alert(lat,lon);
     let location = [lat,lon];
+    alert(location);
     map.setView(location,14);
     L.marker(location).addTo(map);
 };
