@@ -15,7 +15,7 @@ async function ajaxSearch(region) {
 
         //iterate through results to display information
         document.getElementById("results").innerHTML = "";
-        html = `<table id="table1" class="table table-bordered table-responsive table-hover table-sm">`;
+        html = `<table class="table table-bordered table-responsive table-hover table-sm">`;
         let rowid = 0;
         results.forEach(result => {
             html +=
@@ -31,7 +31,7 @@ async function ajaxSearch(region) {
             <td>${result.recommendation}</td>
             <td><input type="button" id="recSub" onclick="recommend(${result.ID})" value="recommend"/></td>
             <td><input type="button" id="goto" onclick="goto(${result.lat},${result.lon})" value="go to"/></td>
-            <td class="d-none" onclick="pin(${result.lat},${result.lon})></td></tr>
+            <td class="d-none" onclick="pin(${result.lat},${result.lon})></td>
             </tr>`;
             rowid++;
         });
