@@ -14,6 +14,14 @@ function goto(lat,lon){
     let location = [lat,lon];
     alert(location);
     map.setView(location,14);
-    
-    };
+    L.marker(location).addTo(map);
+};
 
+function pin(){
+    let lat =  document.getElementById("0").getElementById("lat0");
+    let lon =  document.getElementById("0").getElementById("lon0");
+    console.log(lat,lon);
+    let location = [lat,lon];
+    map.setView(location,14);
+    L.marker(location).addTo(map);
+};

@@ -15,12 +15,29 @@ async function ajaxSearch(region) {
 
         //iterate through results to display information
         document.getElementById("results").innerHTML = "";
-        html = `<table class="table table-bordered table-responsive table-hover table-sm">`;
+        html = `<table id="table1" class="table table-bordered table-responsive table-hover table-sm">`;
+        let rowid = 0;
         results.forEach(result => {
-            html += `<tr><td>${result.ID}</td> <td>${result.name}</td> <td>${result.type}</td> <td>${result.country}</td> <td>${result.region}</td><td class=d-none>${result.lat}</td><td class="d-none">${result.lon}</td><td>${[result.lat,result.lon]}</td><td>${result.description}</td> <td>${result.recommendation}</td><td><input type="button" id="recSub" onclick="recommend(${result.ID})" value="recommend"/></td><td><input type="button" id="goto" onclick="goto(${result.lat},${result.lon})" value="go to"/></td></tr>`;    
+            html +=
+            `<tr id="${rowid}">
+            <td>${result.ID}</td>
+            <td>${result.name}</td>
+            <td>${result.type}</td>
+            <td>${result.country}</td>
+            <td>${result.region}</td>
+            <td class="d-none" id="lat${rowid}" >${result.lat}</td>
+            <td class="d-none" id="lon${rowid}">${result.lon}</td>
+            <td>${result.description}</td>
+            <td>${result.recommendation}</td>
+            <td><input type="button" id="recSub" onclick="recommend(${result.ID})" value="recommend"/></td>
+            <td><input type="button" id="goto" onclick="goto(${result.lat},${result.lon})" value="go to"/></td>
+            <td class="d-none" onclick="pin(${result.lat},${result.lon})></td></tr>
+            </tr>`;
+            rowid++;
         });
         html += "</table>"
         
+
         document.getElementById('results').innerHTML = html;
     } catch (e) {
         alert(`Error: ${e}`);
@@ -34,6 +51,8 @@ async function ajaxSearch(region) {
 document.getElementById("regionSub").addEventListener("click",()=>{
     const region = document.getElementById('region').value;
     ajaxSearch(region);
+    pin();
+    
 });
 
 
