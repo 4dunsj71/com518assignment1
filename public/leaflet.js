@@ -12,17 +12,12 @@ map.setView([50.908,-1.4], 14);
 
 function goto(lat,lon){
     let location = [lat,lon];
-    alert(location);
-    map.setView(location,14);
-    L.marker(location).addTo(map);
+    console.log(location);
+    map.setView(location,10);
 };
 
-function pin(){
-    let lat =  document.getElementById("lat0").getvalue;
-    let lon =  document.getElementById("lon0").getvalue;
-    alert(lat,lon);
+function pin(lat,lon){
     let location = [lat,lon];
-    alert(location);
-    map.setView(location,14);
+    console.log(location);
     L.marker(location).addTo(map);
 };

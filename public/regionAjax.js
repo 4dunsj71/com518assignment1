@@ -17,6 +17,7 @@ async function ajaxSearch(region) {
         document.getElementById("results").innerHTML = "";
         html = `<table class="table table-bordered table-responsive table-hover table-sm">`;
         let rowid = 0;
+        pininfo = [];
         results.forEach(result => {
             html +=
             `<tr id="${rowid}">
@@ -25,20 +26,31 @@ async function ajaxSearch(region) {
             <td>${result.type}</td>
             <td>${result.country}</td>
             <td>${result.region}</td>
-            <td class="d-none" id="lat${rowid}" >${result.lat}</td>
-            <td class="d-none" id="lon${rowid}">${result.lon}</td>
+            <td class="" id="lat${rowid}" >${result.lat}</td>
+            <td class="" id="lon${rowid}">${result.lon}</td>
             <td>${result.description}</td>
             <td>${result.recommendation}</td>
             <td><input type="button" id="recSub" onclick="recommend(${result.ID})" value="recommend"/></td>
             <td><input type="button" id="goto" onclick="goto(${result.lat},${result.lon})" value="go to"/></td>
-            <td class="d-none" onclick="pin(${result.lat},${result.lon})></td>
+            <td class="d-none" onclick="pin(${result.lat},${result.lon})"></td>
             </tr>`;
+            if(rowid == 0){
+                goto(result.lat,result.lon);
+            }
+            pin(result.lat,result.lon);
             rowid++;
+
         });
         html += "</table>"
-        
-
+        console.log(pininfo);
+        console.log(pininfo[0]);
+        //goto(pininfo[1]);
+        /*pininfo.forEach(location=>{
+            pin(location);
+        });*/
         document.getElementById('results').innerHTML = html;
+
+
     } catch (e) {
         alert(`Error: ${e}`);
     }
@@ -51,7 +63,7 @@ async function ajaxSearch(region) {
 document.getElementById("regionSub").addEventListener("click",()=>{
     const region = document.getElementById('region').value;
     ajaxSearch(region);
-    pin();
+    
     
 });
 
