@@ -29,12 +29,15 @@ function pin(lat,lon,name,desc,rec,id){
     });
 };
 
-map.on("click", e =>{
-    lat = e.latlng.lat;
-    lon = e.latlng.lon;
-    location = [lat,lon];
-    const marker = L.marker(location);
-    marker.bindPopup("gay").openPopup();
+map.on('click', function(ev) {
+    let lat = ev.latlng.lat;
+    let lon = ev.latlng.lng;
+    let location = [lat,lon];
+    console.log(lat);
+    console.log(lon);
+    const marker = L.marker(location).addTo(map);
+    marker.bindPopup("").openPopup();
     
 });
+
 
