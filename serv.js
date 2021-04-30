@@ -93,7 +93,45 @@ const con = require('./mysqlconn');
             );
         });
 
+        app.post('/login', (req, res) => {
+            var user = request.body.user;
+            var pass = request.body.pass;
+            if (user && pass) {
+                connection.query('SELECT * FROM poi_users WHERE username = ? AND password = ?', [user, pass], function(error, results, fields) {
+                    if (results.length > 0) {
+                        req.session.login = true;
+                        req.session.user = user;
+                        
+                    }      
+                    
+                });
+            } 
+        });
+
+        app.post('/logout',(req,res)=>{
+            if(req.session.login != ""){
+                req.session = null;
+            };
+        });
         
-        
+        app.post('/auth', function(request, response) {
+            var username = request.body.username;
+            var password = request.body.password;
+            if (username && password) {
+                connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+                    if (results.length > 0) {
+                        request.session.loggedin = true;
+                        request.session.username = username;
+                        response.redirect('/home');
+                    } else {
+                        response.send('Incorrect Username and/or Password!');
+                    }            
+                    response.end();
+                });
+            } else {
+                response.send('Please enter Username and Password!');
+                response.end();
+            }
+        });
 
 app.listen(3000);
