@@ -15,7 +15,7 @@ async function ajaxSearch(region) {
 
         //iterate through results to display information
         document.getElementById("results").innerHTML = "";
-        html = `<table class="table table-bordered table-responsive table-hover table-sm">`;
+        html = `<table class=" d-none table table-bordered table-responsive table-hover table-sm">`;
         let rowid = 0;
         pininfo = [];
         results.forEach(result => {
